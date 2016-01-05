@@ -6,16 +6,20 @@ from datetime import datetime
 from io import open
 import re
 import sys
+import requests
+import json
 from fake_useragent import UserAgent
 if sys.version_info[0] == 2:  # Python 2
     from cookielib import CookieJar
     from cStringIO import StringIO
     from urllib import urlencode
+    from urllib import quote
     from urllib2 import build_opener, HTTPCookieProcessor
 else:  # Python 3
     from http.cookiejar import CookieJar
     from io import StringIO
     from urllib.parse import urlencode
+    from urllib.parse import quote
     from urllib.request import build_opener, HTTPCookieProcessor
 
 
@@ -60,20 +64,19 @@ class pyGTrends(object):
         galx = re.compile('<input name="GALX"[\s]+type="hidden"[\s]+value="(?P<galx>[a-zA-Z0-9_-]+)">')
         m = galx.search(resp)
         if not m:
-            raise Exception('Cannot parse GALX out of login page')
+            galx = re.compile('<input type="hidden"[\s]+name="GALX"[\s]+value="(?P<galx>[a-zA-Z0-9_-]+)">')
+            m = galx.search(resp)
+            if not m:
+                raise Exception('Cannot parse GALX out of login page')
+
         self.login_params['GALX'] = m.group('galx')
         params = urlencode(self.login_params).encode('utf-8')
         self.opener.open(self.url_ServiceLoginBoxAuth, params)
         self.opener.open(self.url_CookieCheck)
         self.opener.open(self.url_PrefCookie)
 
-    def request_report(self, keywords, hl='en-US', cat=None, geo=None,
-                        date=None, use_topic=False):
-        # use_topic prevents re-urlencoding of topic id's.
-        if use_topic:
-            query_param = 'q=' + keywords
-        else:
-            query_param = str(urlencode({'q':keywords}))
+    def request_report(self, keywords, hl='en-US', cat=None, geo=None, date=None, tz=None):
+        query_param = 'q=' + quote(keywords)
 
         # This logic handles the default of skipping parameters
         # Parameters that are set to '' will not filter the data requested.
@@ -83,13 +86,17 @@ class pyGTrends(object):
         else:
             cat_param = ''
         if date is not None:
-            date_param = '&' + str(urlencode({'date':date}))
+            date_param = '&date=' + quote(date)
         else:
             date_param = ''
         if geo is not None:
             geo_param = '&geo=' + geo
         else:
             geo_param = ''
+        if tz is not None:
+            tz_param = '&tz=' + tz
+        else:
+            tz_param = ''
         hl_param = '&hl=' + hl
 
         # These are the default parameters and shouldn't be changed.
@@ -97,8 +104,8 @@ class pyGTrends(object):
         content_param = "&content=1"
         export_param = "&export=1"
 
-        combined_params = query_param + cat_param + date_param \
-                          + geo_param + hl_param + cmpt_param + content_param + export_param
+        combined_params = query_param + cat_param + date_param + geo_param + hl_param + tz_param + cmpt_param \
+                          + content_param + export_param
 
         print("Now downloading information for:")
         print("http://www.google.com/trends/trendsReport?" + combined_params)
@@ -112,11 +119,18 @@ class pyGTrends(object):
 
     def save_csv(self, path, trend_name):
         fileName = path + trend_name + ".csv"
-        with open(fileName, mode='w') as f:
-            f.write(self.decode_data)
+        with open(fileName, mode='wb') as f:
+            f.write(self.decode_data.encode('utf8'))
 
     def get_data(self):
         return self.decode_data
+
+    def get_suggestions(self, keyword):
+        kw_param = quote(keyword)
+        raw_data = self.opener.open("https://www.google.com/trends/api/autocomplete/" + kw_param).read()
+        # response is invalid json but if you strip off ")]}'," from the front it is then valid
+        json_data = json.loads(raw_data[5:].decode())
+        return json_data
 
 
 def parse_data(data):
@@ -146,6 +160,7 @@ def parse_data(data):
                 parsed_data['info'] = {'source': source, 'query': query,
                                        'geo': geo, 'period': period}
         else:
+            chunk = _clean_subtable(chunk)
             rows = [row for row in csv.reader(StringIO(chunk)) if row]
             if not rows:
                 continue
@@ -157,6 +172,21 @@ def parse_data(data):
                 parsed_data[label] = parsed_rows
 
     return parsed_data
+
+
+def _clean_subtable(chunk):
+    """
+    The data output by Google Trends is human-friendly, not machine-friendly;
+    this function fixes a couple egregious data problems.
+    1. Google replaces rising search percentages with "Breakout" if the increase
+    is greater than 5000%: https://support.google.com/trends/answer/4355000 .
+    For parsing's sake, we set it equal to that high threshold value.
+    2. Rising search percentages between 1000 and 5000 have a comma separating
+    the thousands, which is terrible for CSV data. We strip it out.
+    """
+    chunk = re.sub(r',Breakout\n', ',5000%\n', chunk)
+    chunk = re.sub(r'(,[+-]?[1-4]),(\d{3}%\n)', r'\1\2', chunk)
+    return chunk
 
 
 def _infer_dtype(val):
@@ -209,14 +239,6 @@ def _parse_rows(rows, header='infer'):
         raise ValueError('rows={0} is invalid'.format(rows))
     rows = copy.copy(rows)
     label = rows[0][0].replace(' ', '_').lower()
-
-    # HACK: Google replaces rising search percentages with "Breakout" if
-    # the increase is greater than 5000: https://support.google.com/trends/answer/4355000
-    # for parsing's sake, let's just set it equal to that high threshold value
-    for i, row in enumerate(rows):
-        for j, val in enumerate(row[1:]):
-            if val == 'Breakout':
-                rows[i][j+1] = '5000%'
 
     if header == 'infer':
         if len(rows) >= 3:
