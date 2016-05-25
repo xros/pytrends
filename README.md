@@ -34,7 +34,7 @@ pytrends
   - password for the gmail account
 
 ### Request a Report
-**request_report(keywords, hl='en-US', cat=None, geo=None, date=None)**
+**request_report(keywords, hl='en-US', cat=None, geo=None, date=None, gprop=None)**
 
 **Parameters**
 * Keywords
@@ -62,6 +62,9 @@ pytrends
   - Two letter country abbreviation
   - For example United States is ```"US"```
   - Defaults to World
+  - More detail available for States/Provinces by specifying additonal abbreviations
+  - For example: Alabama would be ```US-AL```
+  - For example: England would be ```GB-ENG```
 * tz
   - Timezone using Etc/GMT
   - For example US CST is ```"Etc/GMT+5"```
@@ -91,6 +94,10 @@ pytrends
       - 1-3 hours will return 1min intervals of data
       - 4-26 hours will return 8min intervals of data
       - 27-34 hours will return 16min intervals of data
+* gprop
+  - What search data we want
+  - Defaults to web searches
+  - Can be ```images```, ```news```, ```youtube``` or ```froogle``` (for Google Shopping results)
 
 ### Save a Report to file
 **save_csv(path, trend_name)**
