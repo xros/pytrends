@@ -1,0 +1,223 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://trends.google.com/trends/explore/?geo=US
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAALxU7YoUORR9ldjDwIxMuj5mhtb6YndBRRGRxQX/SapyqyrbqSQmqakemwZfw9fz
+        Sbyp7nbGgQVh0T/d5ObWPeeee3OK3g+SSKa6ElRVDOAZaXpmHfhy9C19cogpNkB5I2Ay2nrSaOVB
+        +XIhlPCCSeoaJqFMLsiAkWEc7gKT4L4vOdyIBuh8WFSFF15C9cxabclVfEXO3mhPnutR8fNHj5Ii
+        2t8Xzt9KIEqrBsrF2+n9q5fr5mP9kmnx/i3/682/MP65qB5vB2Y7obI4N4xzobos3oWuLhrNYdsi
+        1Sy5NpsoTc2GMIt0LxxTjjqwop0ztzVr1p0N+NlJ27Z5o6W22Umapt9rhhK7WvPb7b1LDxtPmRSd
+        ykaFkuUHKqtTwkavSYyBzb7r7PJpbDY56kN7EF2PpJ6EwLH+JR5ITAJMvntMKjJj3SM2WnkWRdM0
+        LTutOwnLRg+RGFgHLoKgpIusrrVfGtWdkySOTwnWQvWoBQPMH5GondHTODRkjuIlyQwfNMr1DdhW
+        6inrBeegdsbCduqFB+oMayDDM50sM/lOKHeUY7Va7eXg0GjLvNAqw8nBjhExdNtaWw4WJ/PHAFww
+        4hoLoAhTnJzdabRaIf759mHroc5BWuq1ye7LOt/92Fq8251I3emfVa+2SAM/j/ZX4dMo2dw7fZh7
+        /JBcx5vrK272Ct8Je2AmofUZDaoeetRK3v7YKGZZcFqOszzJ05Qbcb7932TTnydLcC3i02hej/CT
+        00F/ovvp0BniF6DjQP5LEjpBvRaeBmkOJmHEBiSdVyhLf686+ZHOHRx14hNk3/U6rhYXzkh2mwkl
+        hQJaS92s88PDvr7CR7TfTsTBfSii2cnQSplQRPBywVo6v1kanBSDYBfEanTMRUhBh2Skt9CWD/tE
+        TzRsLhFYzG5GJatBli/mnH0RfHAVYmIm/rGqMFVRV+izyyKqK1Lgq63e9cx//fzF4RTIzATvQhxz
+        3/VYBj6O4Dxw8s/fr8nEHGrkSRsEwRkS3wtH0D/RKJYP60lJJiBrpadjySj0VH0DAAD//wMAru7h
+        QGoGAAA=
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Content-Encoding:
+      - gzip
+      Content-Security-Policy:
+      - 'script-src ''nonce-tIV8qyIxbgQRov-xpT3KjQ'' ''unsafe-inline'' ''strict-dynamic''
+        https: http: ''unsafe-eval'';object-src ''none'';base-uri ''self'';report-uri
+        /cspreport'
+      Content-Type:
+      - text/html; charset=utf-8
+      Cross-Origin-Opener-Policy:
+      - same-origin-allow-popups
+      Date:
+      - Sun, 26 Mar 2023 08:09:16 GMT
+      Expires:
+      - Mon, 01 Jan 1990 00:00:00 GMT
+      P3P:
+      - CP="This is not a P3P policy! See g.co/p3phelp for more info."
+      Pragma:
+      - no-cache
+      Server:
+      - GSE
+      Set-Cookie:
+      - NID=511=AEUVAK4aw4gv7bzjrTIvmNNcUvpEyx3LKooQzElPkIt475tIwXs-dlPvf6AHwN4WzJ_xg3zwp1RskrPUhxwVeyPPZ7f6r4IEnuVyTZwJ8IZ8-ENIvJORZutMPcCJeyqSlTkU_zD4Hd-HM-I9GK_Hy-6DAGgRfyCR7cystDN5olU;
+        expires=Mon, 25-Sep-2023 08:09:16 GMT; path=/; domain=.google.com; HttpOnly
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      Cookie:
+      - NID=511=AEUVAK4aw4gv7bzjrTIvmNNcUvpEyx3LKooQzElPkIt475tIwXs-dlPvf6AHwN4WzJ_xg3zwp1RskrPUhxwVeyPPZ7f6r4IEnuVyTZwJ8IZ8-ENIvJORZutMPcCJeyqSlTkU_zD4Hd-HM-I9GK_Hy-6DAGgRfyCR7cystDN5olU
+      User-Agent:
+      - python-requests/2.28.1
+      accept-language:
+      - en-US
+    method: POST
+    uri: https://trends.google.com/trends/api/explore?hl=en-US&tz=360&req=%7B%22comparisonItem%22%3A+%5B%7B%22keyword%22%3A+%22pizza%22%2C+%22time%22%3A+%222021-01-01+2021-01-05%22%2C+%22geo%22%3A+%22%22%7D%2C+%7B%22keyword%22%3A+%22bagel%22%2C+%22time%22%3A+%222021-01-01+2021-01-05%22%2C+%22geo%22%3A+%22%22%7D%5D%2C+%22category%22%3A+0%2C+%22property%22%3A+%22%22%7D
+  response:
+    body:
+      string: !!binary |
+        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
+        7jZ6OHciAAA=
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Content-Disposition:
+      - attachment; filename="json.txt"; filename*=UTF-8''json.txt
+      Content-Encoding:
+      - gzip
+      Content-Security-Policy:
+      - 'script-src ''nonce-Wy4IYb8h1tFTm10VpVoNGg'' ''unsafe-inline'' ''strict-dynamic''
+        https: http: ''unsafe-eval'';object-src ''none'';base-uri ''self'';report-uri
+        /trends/cspreport'
+      Content-Type:
+      - application/json; charset=utf-8
+      Cross-Origin-Opener-Policy:
+      - same-origin-allow-popups
+      Date:
+      - Sun, 26 Mar 2023 08:09:16 GMT
+      Expires:
+      - Mon, 01 Jan 1990 00:00:00 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - GSE
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - NID=511=AEUVAK4aw4gv7bzjrTIvmNNcUvpEyx3LKooQzElPkIt475tIwXs-dlPvf6AHwN4WzJ_xg3zwp1RskrPUhxwVeyPPZ7f6r4IEnuVyTZwJ8IZ8-ENIvJORZutMPcCJeyqSlTkU_zD4Hd-HM-I9GK_Hy-6DAGgRfyCR7cystDN5olU
+      User-Agent:
+      - python-requests/2.28.1
+      accept-language:
+      - en-US
+    method: GET
+    uri: https://trends.google.com/trends/api/widgetdata/multiline?req=%7B%22time%22%3A+%222021-01-01+2021-01-05%22%2C+%22resolution%22%3A+%22DAY%22%2C+%22locale%22%3A+%22en-US%22%2C+%22comparisonItem%22%3A+%5B%7B%22geo%22%3A+%7B%7D%2C+%22complexKeywordsRestriction%22%3A+%7B%22keyword%22%3A+%5B%7B%22type%22%3A+%22BROAD%22%2C+%22value%22%3A+%22pizza%22%7D%5D%7D%7D%2C+%7B%22geo%22%3A+%7B%7D%2C+%22complexKeywordsRestriction%22%3A+%7B%22keyword%22%3A+%5B%7B%22type%22%3A+%22BROAD%22%2C+%22value%22%3A+%22bagel%22%7D%5D%7D%7D%5D%2C+%22requestOptions%22%3A+%7B%22property%22%3A+%22%22%2C+%22backend%22%3A+%22IZG%22%2C+%22category%22%3A+0%7D%2C+%22userConfig%22%3A+%7B%22userType%22%3A+%22USER_TYPE_SCRAPER%22%7D%7D&token=APP6_UEAAAAAZCFPLHz6xkRipufcZZNE92hnrJrQM4XT&tz=360
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAJTQPQvCMBAG4N1fIbeIkOHy1abdBCdncZEOB0YtVIU2LULpfzdqByUtpUuG+8g9
+        vOusW7FFCyd7prpwkLbg8pst8rvdkiNIj98CpMAjTJROBCIwOD/KGzlnT/tvc0f3JWdLgYL/djfP
+        vBqcaKioffXIEZnIGFyp6u+5srbs/WQ//xz6ceCf6wKyjv3BtNLRKExMwkQAM3KWy8hBViR9XGMs
+        OcmSASs2s1ixGWTF3KhRlppkqYClEsZnsFTid3nAMqjMKEtPsnTA0jiLpbFn+S41tqSLrd6ZC595
+        170AAAD//wMAxV1QWSsDAAA=
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Cache-Control:
+      - private, max-age=0
+      Content-Disposition:
+      - attachment; filename="json.txt"
+      Content-Encoding:
+      - gzip
+      Content-Security-Policy:
+      - 'script-src ''nonce-mm5w_0OdMAvzDnRUl0AsFg'' ''unsafe-inline'' ''strict-dynamic''
+        https: http: ''unsafe-eval'';object-src ''none'';base-uri ''self'';report-uri
+        /trends/cspreport'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Cross-Origin-Opener-Policy:
+      - same-origin-allow-popups
+      Date:
+      - Sun, 26 Mar 2023 08:09:16 GMT
+      Expires:
+      - Sun, 26 Mar 2023 08:09:16 GMT
+      Server:
+      - GSE
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1
